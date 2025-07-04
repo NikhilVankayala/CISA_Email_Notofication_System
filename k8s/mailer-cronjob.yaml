@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: kev-email-sender
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: kev-email-sender
+            image: kev-email-service:latest
+            env:
+              - name: DB_HOST
+                value: "host.docker.internal"
+              - name: DB_USER
+                value: "root"
+              - name: DB_PASSWORD
+                value: ""
+              - name: DB_NAME
+                value: "kev_db"
+              - name: SENDGRID_API_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: sendgrid-secret
+                    key: api_key
+              - name: SENDER_EMAIL
+                value: "nikhil.vankayala7@gmail.com"
+          restartPolicy: OnFailure
+

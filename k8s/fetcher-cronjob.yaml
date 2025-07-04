@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: kev-fetcher
+spec:
+  schedule: "0 * * * *"  # Run every hour
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: kev-fetcher
+              image: nvank/kev-fetcher:latest
+              env:
+                - name: DB_HOST
+                  value: "host.docker.internal"
+                - name: DB_USER
+                  value: "root"
+                - name: DB_PASSWORD
+                  value: ""
+                - name: DB_NAME
+                  value: "kev_db"
+          restartPolicy: OnFailure
