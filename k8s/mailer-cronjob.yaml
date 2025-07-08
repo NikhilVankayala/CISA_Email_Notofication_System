@@ -10,7 +10,8 @@ spec:
         spec:
           containers:
           - name: kev-email-sender
-            image: kev-email-service:latest
+            image: kev-email-sender-test
+            imagePullPolicy: Never
             env:
               - name: DB_HOST
                 value: "host.docker.internal"
