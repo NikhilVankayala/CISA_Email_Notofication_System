@@ -5,6 +5,7 @@ def create_app():
     app = Flask(__name__)
     
     # Register your API routes from routes.py
+    app.secret_key = 'warriors'
     register_routes(app)
     
     return app

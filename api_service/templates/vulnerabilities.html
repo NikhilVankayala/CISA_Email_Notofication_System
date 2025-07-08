@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+<h3>Latest KEV Vulnerabilities</h3>
+<table>
+  <tr>
+    <th>CVE ID</th>
+    <th>Vendor</th>
+    <th>Product</th>
+    <th>Name</th>
+    <th>Date Added</th>
+  </tr>
+  {% for vuln in data %}
+  <tr>
+    <td>{{ vuln.cve_id }}</td>
+    <td>{{ vuln.vendor_project }}</td>
+    <td>{{ vuln.product }}</td>
+    <td>{{ vuln.vuln_name }}</td>
+    <td>{{ vuln.date_added }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

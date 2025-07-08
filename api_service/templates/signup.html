@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+<h3>Sign Up</h3>
+<form method="POST">
+  <label>Name: <input type="text" name="name" required></label><br>
+
+  <label>
+    <input type="checkbox" name="wants_alerts" id="wants_alerts" onchange="toggleEmail()">
+    Receive email alerts on new cybersecurity vulnerabilities
+  </label><br>
+
+  <div id="emailDiv" style="display:none;">
+    <label>Email: <input type="email" name="email" id="emailInput"></label><br>
+  </div>
+
+  <label>Password: <input type="password" name="password" required></label><br>
+
+  <button type="submit">Register</button>
+</form>
+
+<script>
+function toggleEmail() {
+  var check = document.getElementById("wants_alerts").checked;
+  document.getElementById("emailDiv").style.display = check ? "block" : "none";
+  document.getElementById("emailInput").required = check;
+}
+</script>
+<p>Already have an account? <a href="{{ url_for('login') }}">Log in</a></p>
+{% endblock %}
